@@ -12,14 +12,10 @@ const Icon = ({ styles, imgUrl, name, isActive, disabled, handleClick }) => (
     } ${styles}`}
     onClick={handleClick}
   >
-    {!isActive ? (
-      <img src={imgUrl} alt="fund_logo" className="w-1/2 h-1/2" />
+    {isActive === name ? (
+      <img src={imgUrl} alt={name} className="w-1/2 h-1/2" />
     ) : (
-      <img
-        src={imgUrl}
-        alt="fund_logo"
-        className={`w-1/2 h-1/2 ${isActive !== name && "grayscale"} `}
-      />
+      <img src={imgUrl} alt={name} className="w-1/2 h-1/2 grayscale" />
     )}
   </div>
 );
@@ -39,6 +35,7 @@ const Sidebar = () => {
           {navlinks.map((item) => (
             <Icon
               key={item.name}
+              // spreading all the items inside navlinks
               {...item}
               isActive={isActive}
               handleClick={() => {
