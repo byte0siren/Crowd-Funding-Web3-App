@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
-
-error CrowdFunding__IncreaseDeadlineTime();
-error CrowdFunding__DonationMustNotBeZero();
+pragma solidity ^0.8.8;
 
 /// @author Rohit Kumar Suman. Connect with me on `Twitter ? "@SumanRohitK7" : "Github => @RohitKS7"`
 /// @title Contract to CrowdFund for any cause
@@ -24,7 +21,7 @@ contract CrowdFunding {
     uint256 public numberOfCampaigns = 0;
 
     /// @dev Creating a Campagin which returns the ID of the campagin
-    function createCampagin(
+    function createCampaign(
         address _owner,
         string memory _title,
         string memory _description,
@@ -34,9 +31,10 @@ contract CrowdFunding {
     ) public returns (uint256) {
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
-        if (campaign.deadline < block.timestamp) {
-            revert CrowdFunding__IncreaseDeadlineTime();
-        }
+        require(
+            campaign.deadline < block.timestamp,
+            "The deadline should be a date in the future."
+        );
 
         campaign.owner = _owner;
         campaign.title = _title;
@@ -53,12 +51,8 @@ contract CrowdFunding {
     }
 
     /// @dev Donate to listed campaigns
-    function donateToCampagin(uint256 _id) public payable {
+    function donateToCampaign(uint256 _id) public payable {
         uint256 amount = msg.value;
-
-        if (amount <= 0) {
-            revert CrowdFunding__DonationMustNotBeZero();
-        }
 
         Campaign storage campaign = campaigns[_id];
 

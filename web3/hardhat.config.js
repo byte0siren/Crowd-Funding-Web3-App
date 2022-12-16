@@ -8,7 +8,7 @@ const GOERLI_RPC_URL =
 
 module.exports = {
   solidity: {
-    version: "0.8.9",
+    version: "0.8.8",
     defaultNetwork: "goerli",
     networks: {
       hardhat: {},
