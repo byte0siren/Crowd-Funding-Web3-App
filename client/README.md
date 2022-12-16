@@ -1,5 +1,7 @@
 ## Getting Started
 
+> TIP: Try to keep all the blockchain intractions in one file and wrap your whole App inside that context to access any data all around your app. In my case, they are inside context.
+
 Create a frontend project using this example:
 
 ```bash
