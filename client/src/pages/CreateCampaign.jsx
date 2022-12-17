@@ -8,7 +8,7 @@ import { CustomButton, FormField } from "../components";
 import { checkIfImage } from "../utils";
 
 const CreateCampaign = () => {
-  const { createCampaign } = useStateContext();
+  const { createCampaign, address } = useStateContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
@@ -124,8 +124,8 @@ const CreateCampaign = () => {
         <div className="flex justify-center items-center mt-[40px]">
           <CustomButton
             btnType="submit"
-            title="Submit new campaign"
-            styles="bg-[#1dc071]"
+            title={address ? "Submit new campaign" : "Connect Wallet"}
+            styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
           />
         </div>
       </form>

@@ -7,7 +7,7 @@ import { useStateContext } from "../context";
 import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Navbar = () => {
-  const { connect, address } = useStateContext();
+  const { address } = useStateContext();
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
@@ -31,15 +31,6 @@ const Navbar = () => {
       </div>
 
       <div className="hidden sm:flex flex-row justify-end gap-4">
-        {/* <CustomButton
-          btnType="button"
-          title={address ? "Create a campaign" : "Connect"}
-          styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-          handleClick={() => {
-            if (address) navigate("/create-campaign");
-            else connect();
-          }}
-        /> */}
         {address ? (
           <>
             <CustomButton
@@ -50,10 +41,10 @@ const Navbar = () => {
                 if (address) navigate("/create-campaign");
               }}
             />
-            <ConnectWallet />
+            <ConnectWallet accentColor={"#1c1c24"} />
           </>
         ) : (
-          <ConnectWallet accentColor={address ? "#1dc071" : "#8c6dfd"} />
+          <ConnectWallet accentColor={"#8c6dfd"} />
         )}
 
         <Link to="/profile">
@@ -68,7 +59,6 @@ const Navbar = () => {
       </div>
 
       {/* SECTION mobile navbar menu */}
-
       <div className="flex sm:hidden justify-between items-center relative">
         <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center">
           <img
@@ -137,10 +127,10 @@ const Navbar = () => {
                     if (address) navigate("/create-campaign");
                   }}
                 />
-                <ConnectWallet />
+                <ConnectWallet accentColor={"#1c1c24"} />
               </>
             ) : (
-              <ConnectWallet accentColor={address ? "#1dc071" : "#8c6dfd"} />
+              <ConnectWallet accentColor={"#8c6dfd"} />
             )}
           </div>
         </div>
