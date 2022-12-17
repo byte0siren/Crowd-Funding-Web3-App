@@ -4,6 +4,7 @@ import { CustomButton } from "./";
 import { logo, menu, search, thirdweb } from "../assets";
 import { navlinks } from "../constants";
 import { useStateContext } from "../context";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Navbar = () => {
   const { connect, address } = useStateContext();
@@ -30,15 +31,30 @@ const Navbar = () => {
       </div>
 
       <div className="hidden sm:flex flex-row justify-end gap-4">
-        <CustomButton
+        {/* <CustomButton
           btnType="button"
           title={address ? "Create a campaign" : "Connect"}
           styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
           handleClick={() => {
-            if (address) navigate("create-campaign");
+            if (address) navigate("/create-campaign");
             else connect();
           }}
-        />
+        /> */}
+        {address ? (
+          <>
+            <CustomButton
+              btnType="button"
+              title={"Create a campaign"}
+              styles={"bg-[#1dc071]"}
+              handleClick={() => {
+                if (address) navigate("/create-campaign");
+              }}
+            />
+            <ConnectWallet />
+          </>
+        ) : (
+          <ConnectWallet accentColor={address ? "#1dc071" : "#8c6dfd"} />
+        )}
 
         <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
@@ -111,15 +127,21 @@ const Navbar = () => {
           </ul>
 
           <div className="flex mx-4 ">
-            <CustomButton
-              btnType="button"
-              title={address ? "Create a campaign" : "Connect"}
-              styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-              handleClick={() => {
-                if (address) navigate("create-campaign");
-                else connect();
-              }}
-            />
+            {address ? (
+              <>
+                <CustomButton
+                  btnType="button"
+                  title={"Create a campaign"}
+                  styles={"bg-[#1dc071]"}
+                  handleClick={() => {
+                    if (address) navigate("/create-campaign");
+                  }}
+                />
+                <ConnectWallet />
+              </>
+            ) : (
+              <ConnectWallet accentColor={address ? "#1dc071" : "#8c6dfd"} />
+            )}
           </div>
         </div>
       </div>

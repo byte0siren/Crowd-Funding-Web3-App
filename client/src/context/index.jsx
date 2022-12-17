@@ -70,6 +70,17 @@ export const StateContextProvider = ({ children }) => {
     return parsedCampaigns;
   };
 
+  // SECTION function to get only the campaigns we created
+  const getUserCampaigns = async () => {
+    const allCampaigns = await getCampaigns();
+
+    const filteredCampaigns = allCampaigns.filter(
+      (campaign) => campaign.owner === address
+    );
+
+    return filteredCampaigns;
+  };
+
   return (
     <StateContext.Provider
       value={{
@@ -79,6 +90,7 @@ export const StateContextProvider = ({ children }) => {
         // renaming publishCampaign to createCampaign
         createCampaign: publishCampaign,
         getCampaigns,
+        getUserCampaigns,
       }}
     >
       {children}
