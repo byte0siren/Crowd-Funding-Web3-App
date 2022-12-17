@@ -36,7 +36,7 @@ const Navbar = () => {
             <CustomButton
               btnType="button"
               title={"Create a campaign"}
-              styles={"bg-[#1dc071]"}
+              styles={"bg-[#1dc071] hover:bg-[#1dc060]"}
               handleClick={() => {
                 if (address) navigate("/create-campaign");
               }}
@@ -122,7 +122,7 @@ const Navbar = () => {
                 <CustomButton
                   btnType="button"
                   title={"Create a campaign"}
-                  styles={"bg-[#1dc071]"}
+                  styles={"bg-[#1dc071] hover:bg-[#1dc060]"}
                   handleClick={() => {
                     if (address) navigate("/create-campaign");
                   }}

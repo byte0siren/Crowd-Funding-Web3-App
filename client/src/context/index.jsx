@@ -15,7 +15,7 @@ export const StateContextProvider = ({ children }) => {
     "0x3DE3A33C24e5E6708238AdE88E2F4A3bB43B5642"
   );
 
-  // SECTION Writing Data in contract
+  // SECTION Writing Data in contract {first way to write data with thirdweb}
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
     "createCampaign"
@@ -81,6 +81,34 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
+  // SECTION function to donate {second way to write data with thirdweb}
+  const donate = async (cId, amount) => {
+    const data = await contract.call("donateToCampaign", cId, {
+      value: ethers.utils.parseEther(amount),
+    });
+
+    return data;
+  };
+
+  // SECTION function to get donators list
+  const getDonations = async (cId) => {
+    const donations = await contract.call("getDonators", cId);
+
+    // NOTE number of donations on a each specific project
+    const numberOfDonations = donations[0].length;
+
+    const parsedDonations = [];
+
+    for (let i = 0; i < numberOfDonations; i++) {
+      parsedDonations.push({
+        donator: donations[0][i],
+        donation: ethers.utils.formatEther(donations[1][i].toString()),
+      });
+    }
+
+    return parsedDonations;
+  };
+
   return (
     <StateContext.Provider
       value={{
@@ -91,6 +119,8 @@ export const StateContextProvider = ({ children }) => {
         createCampaign: publishCampaign,
         getCampaigns,
         getUserCampaigns,
+        donate,
+        getDonations,
       }}
     >
       {children}

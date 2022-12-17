@@ -73,7 +73,7 @@ const FundCard = ({
             <img
               src={thirdweb}
               alt="owner"
-              className="w-1/2 h-1/2 object contain"
+              className="w-1/2 h-1/2 object-contain"
             />
           </div>
           <p className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">
