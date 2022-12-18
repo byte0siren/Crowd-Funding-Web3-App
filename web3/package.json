@@ -1,5 +1,5 @@
 {
-  "name": "crowdfunding_by_rohit",
+  "name": "web3",
   "author": "Rohit Kumar Suman",
   "scripts": {
     "build": "npx thirdweb@latest detect",
